@@ -4,6 +4,7 @@ import store, { history } from './store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HeaderContainer from './containers/HeaderContainer'
 import { ConnectedRouter } from 'connected-react-router';
+import './Root.css';
 
 const Root = () => {
     return (<Provider store={store}>

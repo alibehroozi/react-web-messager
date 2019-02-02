@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { goToLogin } from '../../actions/goToLogin';
-//import { Test } from './HeaderContainer.styles';
-
+import { Container } from './HeaderContainer.styles';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 class HeaderContainer extends PureComponent {
     constructor(props) {
         super(props);
@@ -47,9 +49,13 @@ class HeaderContainer extends PureComponent {
             return <h1>Something went wrong.</h1>;
         }
         return (
-            <div className="HeaderContainerWrapper" onClick={this.handleOnClick}>
-                Test content
-      </div>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="title" color="inherit">
+                        Select Your Contact...
+                </Typography>
+                </Toolbar>
+            </AppBar>
         );
     }
 }
