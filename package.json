@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.1",
     "babel-eslint": "^9.0.0",
     "connected-react-router": "^6.2.2",
     "prop-types": "^15.6.2",
