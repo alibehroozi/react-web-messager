@@ -16,8 +16,8 @@ class Socket extends PureComponent {
 
   state = { connected: false };
 
-  emitEvent = (eventName, eventMessage) => {
-    this.socket.emit(eventName, eventMessage);
+  emitEvent = (eventName, eventMessage, callback) => {
+    this.socket.emit(eventName, eventMessage, callback);
   }
 
   listenForEvent = (eventName, callback) => {

@@ -7,33 +7,37 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { SocketContext } from '../../components/Socket';
+import Folder from '../../components/Folder';
+
 class TreeContainer extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            hasError: false,
-        };
-    }
+
+    state = { paths: [] };
     static contextType = SocketContext;
 
-    handleOnClick = () => {
-        this.props.dispatch(goToLogin());
+
+    handleOnClick = (paths) => {
+        return new Promise((resolve) => {
+            this.context.emitEvent('folderInfo', paths, (data) => {
+                resolve(data);
+            });
+        });
+    }
+
+    handleFolderClick = (paths) => {
+        this.setState({ paths });
     }
 
     render() {
-        console.log(this.context);
-
-        if (this.state.hasError) {
-            return <h1>Something went wrong.</h1>;
-        }
-        return (
-            <AppBar position="static" onClick={this.handleOnClick}>
+        return (<>
+            <AppBar position="static">
                 <Toolbar>
                     <Typography variant="title" color="inherit">
-                        Select Your Contact...
+                        Tree...
                 </Typography>
                 </Toolbar>
             </AppBar>
+            <Folder name="root" expanded childExpanded numericPath={this.state.paths} getInfo={this.handleOnClick} onFolderClick={this.handleFolderClick} />
+        </>
         );
     }
 }
