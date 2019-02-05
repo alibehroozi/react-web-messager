@@ -11,20 +11,21 @@ import Folder from '../../components/Folder';
 
 class TreeContainer extends PureComponent {
 
-    state = { paths: [] };
+    state = { paths: [], pt: '' };
     static contextType = SocketContext;
 
 
-    handleOnClick = (paths) => {
+    handleOnClick = (paths, pt) => {
         return new Promise((resolve) => {
-            this.context.emitEvent('folderInfo', paths, (data) => {
+            this.context.emitEvent('folderInfo', { pt, numericPath: paths }, (data) => {
+                console.log(data);
                 resolve(data);
             });
         });
     }
 
-    handleFolderClick = (paths) => {
-        this.setState({ paths });
+    handleFolderClick = (paths, pt) => {
+        this.setState({ paths, pt });
     }
 
     render() {
@@ -36,7 +37,7 @@ class TreeContainer extends PureComponent {
                 </Typography>
                 </Toolbar>
             </AppBar>
-            <Folder name="root" expanded childExpanded numericPath={this.state.paths} getInfo={this.handleOnClick} onFolderClick={this.handleFolderClick} />
+            <Folder name="root" expanded numericPath={this.state.paths} pt={this.state.pt} getInfo={this.handleOnClick} onFolderClick={this.handleFolderClick} />
         </>
         );
     }
